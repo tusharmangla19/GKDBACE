@@ -13,7 +13,7 @@ const Header = ({ theme, darkMode }) => {
 			</div>
 			<div className="head">
 				<h1 className="title">
-					RGD BACE Devotees
+					GKD BACE Devotees
 					<br />
 					Sadhana App
 				</h1>
