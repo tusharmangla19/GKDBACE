@@ -3,7 +3,6 @@ const devoteesData = [
 	{ id: 2, name: "Sachin p" },
 	{ id: 3, name: "Indrajeet p" },
 	{ id: 4, name: "Karuna Avtaar p" },
-	{ id: 5, name: "Abhay p" },
 	{ id: 6, name: "Abhishek Sharma p" },
 	{ id: 7, name: "Priyansh p" },
 	{ id: 8, name: "Abhishek p" },
@@ -11,6 +10,11 @@ const devoteesData = [
 	{ id: 10, name: "Arnav p" },
 	{ id: 11, name: "Anshuman p" },
 	{ id: 12, name: "Ashish p" },
+	{ id: 13, name: "Raghav p" },
+	{ id: 14, name: "Roshan p" },
+	{ id: 15, name: "Anshuman Singh p" },
+	{ id: 16, name: "Sarad p" },
+	{ id: 17, name: "Divyanshu p" },
 ];
 
 export default devoteesData;
