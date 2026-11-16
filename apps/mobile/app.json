@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "IYF Sadhana",
+    "slug": "sadhana-mobile",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/app-icon.png",
+    "scheme": "sadhanamobile",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.iyf.sadhana"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon-foreground.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.iyf.sadhana"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-mark.png",
+          "imageWidth": 180,
+          "backgroundColor": "#F7F3EC",
+          "dark": {
+            "image": "./assets/images/splash-mark-dark.png",
+            "backgroundColor": "#16130F"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

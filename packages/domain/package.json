@@ -1,0 +1,12 @@
+{
+  "name": "@iyf/domain",
+  "version": "1.0.0",
+  "private": true,
+  "description": "What a sadhana day is: the field schema, the aggregation rules, the period model. Pure - it does not know where any of it is stored.",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {
+    "date-fns": "^4.4.0"
+  }
+}

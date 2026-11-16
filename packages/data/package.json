@@ -1,0 +1,13 @@
+{
+  "name": "@iyf/data",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The only package that knows where sadhana is stored. Firestore paths, reads and writes live here and nowhere else.",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {
+    "@iyf/domain": "*",
+    "firebase": "^12.18.0"
+  }
+}

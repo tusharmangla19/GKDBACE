@@ -1,0 +1,81 @@
+rules_version = '2';
+
+/*
+ * Rules for the sadhana collection. GENERATED - see
+ * scripts/generate-firestore-rules.mjs. Change the schema and regenerate.
+ *
+ * There is no auth yet, so these cannot answer "who are you". What they can do -
+ * and what this project previously had none of - is enforce the SHAPE of a write.
+ *
+ * Without that, Firestore accepts any field name from any client, so a typo
+ * becomes a permanent extra field and nobody finds out. It also accepted a number
+ * where a boolean belonged, which is precisely how minutes once got written into
+ * a yes/no field and silently scored as "no" on every screen.
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isKnownDevotee(id) {
+      return id in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
+    }
+
+    function isDateKey(value) {
+      return value is string && value.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+    }
+
+    // Exactly the schema's fields, plus identity and audit. Nothing else.
+    function hasOnlyKnownFields(d) {
+      return d.keys().hasOnly([
+        'devoteeId',
+        'date',
+        'createdAt',
+        'updatedAt',
+        'sleepTime',
+        'wakeUpTime',
+        'mangalaArti',
+        'japa',
+        'sixteenthRound',
+        'attendedClass',
+        'spLecture',
+        'otherLecture',
+        'spBooks',
+        'otherBooks',
+        'seva',
+        'study',
+        'dayRest'
+      ]);
+    }
+
+    function typesAreValid(d) {
+      return (d.sleepTime == null || (d.sleepTime is string && d.sleepTime.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$')))
+        && (d.wakeUpTime == null || (d.wakeUpTime is string && d.wakeUpTime.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$')))
+        && (d.mangalaArti == null || d.mangalaArti is bool)
+        && (d.japa == null || (d.japa is int && d.japa >= 0 && d.japa <= 108))
+        && (d.sixteenthRound == null || (d.sixteenthRound is string && d.sixteenthRound.matches('^([01][0-9]|2[0-3]):[0-5][0-9]$')))
+        && (d.attendedClass == null || d.attendedClass is bool)
+        && (d.spLecture == null || (d.spLecture is int && d.spLecture >= 0 && d.spLecture <= 600))
+        && (d.otherLecture == null || (d.otherLecture is int && d.otherLecture >= 0 && d.otherLecture <= 600))
+        && (d.spBooks == null || (d.spBooks is int && d.spBooks >= 0 && d.spBooks <= 600))
+        && (d.otherBooks == null || (d.otherBooks is int && d.otherBooks >= 0 && d.otherBooks <= 600))
+        && (d.seva == null || (d.seva is int && d.seva >= 0 && d.seva <= 1440))
+        && (d.study == null || (d.study is int && d.study >= 0 && d.study <= 1440))
+        && (d.dayRest == null || (d.dayRest is int && d.dayRest >= 0 && d.dayRest <= 1440));
+    }
+
+    match /days/{dayId} {
+      allow read: if true;
+
+      allow create, update: if
+        // the id must name the day it holds, so a client cannot write a record
+        // that claims to belong to a different devotee or date
+        dayId == request.resource.data.devoteeId + '_' + request.resource.data.date
+        && isKnownDevotee(request.resource.data.devoteeId)
+        && isDateKey(request.resource.data.date)
+        && hasOnlyKnownFields(request.resource.data)
+        && typesAreValid(request.resource.data);
+
+      // Days get corrected, not removed.
+      allow delete: if false;
+    }
+  }
+}
