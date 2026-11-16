@@ -27,7 +27,7 @@ export type FieldKey =
 	| 'study'
 	| 'dayRest';
 
-export type FieldGroupKey = 'japa' | 'attendance' | 'hearing' | 'reading' | 'service' | 'rhythm';
+export type FieldGroupKey = 'japa' | 'attendance' | 'hearing' | 'reading' | 'service' | 'rest';
 
 /** What is actually stored for a field. */
 export type FieldType = 'number' | 'time' | 'boolean';

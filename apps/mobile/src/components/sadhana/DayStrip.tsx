@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { format } from 'date-fns';
 import { Pencil } from 'lucide-react-native';
 import { DAY_STATE, type DayStateValue, type PeriodDay } from '@iyf/domain';
@@ -63,7 +63,7 @@ export default function DayStrip({
 	const [styles, Palette] = useStyles(makeStyles);
 	return (
 		<View>
-			<View style={styles.row}>
+			<ScrollView horizontal contentContainerStyle={styles.row}>
 				{days.map((day) => {
 					const isSelected =
 						selectedDate && format(day.date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
@@ -101,7 +101,7 @@ export default function DayStrip({
 						</Pressable>
 					);
 				})}
-			</View>
+			</ScrollView>
 
 			{showLegend ? (
 				<View style={styles.legend} accessibilityRole="summary">
@@ -130,6 +130,7 @@ export default function DayStrip({
 const makeStyles = (Palette: PaletteShape) =>
 	StyleSheet.create({
 		row: {
+			flexGrow: 1,
 			flexDirection: 'row',
 			justifyContent: 'space-between',
 		},

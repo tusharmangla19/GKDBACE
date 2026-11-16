@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Platform } from 'react-native';
 import { parseTimeToMinutes, minutesToWireTime, type DayValue } from '@iyf/domain';
 import { type PaletteShape, Radius, Space, Type, HIT_SIZE } from '@/constants/palette';
 import { useStyles } from '@/hooks/useStyles';
@@ -56,7 +56,7 @@ export default function FormTimeInput({ value, onChange, label, focus }: FormTim
 	const [hour, setHour] = useState('');
 	const [minute, setMinute] = useState('');
 	const [period, setPeriod] = useState<Meridiem>('AM');
-	const [syncedValue, setSyncedValue] = useState(value);
+	const [syncedValue, setSyncedValue] = useState<DayValue | undefined>();
 	const minuteRef = useRef<TextInput>(null);
 
 	/*
@@ -137,6 +137,7 @@ export default function FormTimeInput({ value, onChange, label, focus }: FormTim
 					value={hour}
 					onChangeText={handleHour}
 					keyboardType="number-pad"
+					inputMode="numeric"
 					placeholder="--"
 					placeholderTextColor={Palette.open}
 					maxLength={2}
@@ -159,6 +160,7 @@ export default function FormTimeInput({ value, onChange, label, focus }: FormTim
 					onChangeText={handleMinute}
 					onBlur={padMinute}
 					keyboardType="number-pad"
+					inputMode="numeric"
 					placeholder="00"
 					placeholderTextColor={Palette.open}
 					maxLength={2}
@@ -215,6 +217,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		input: {
 			...Type.bodyStrong,
+			...(Platform.OS === 'web' && { fontSize: 16 }),
 			color: Palette.textPrimary,
 			paddingVertical: 7,
 			width: 26,
@@ -232,7 +235,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		periodButton: {
 			minWidth: 32,
-			minHeight: HIT_SIZE - 8,
+			minHeight: HIT_SIZE,
 			alignItems: 'center',
 			justifyContent: 'center',
 			backgroundColor: Palette.surfaceSunken,

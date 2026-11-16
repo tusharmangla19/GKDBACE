@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "web": "npm run web --workspace @iyf/mobile --",
+    "web:build": "npm run web:build --workspace @iyf/mobile",
     "mobile": "npm run start --workspace @iyf/mobile",
     "mobile:android": "npm run android --workspace @iyf/mobile",
     "mobile:ios": "npm run ios --workspace @iyf/mobile",

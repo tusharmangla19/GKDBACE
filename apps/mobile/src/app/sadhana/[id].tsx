@@ -88,6 +88,7 @@ export default function SadhanaDetailScreen() {
 	const [styles, Palette] = useStyles(makeStyles);
 	const { id } = useLocalSearchParams();
 	const router = useRouter();
+	const goBack = () => (router.canGoBack() ? router.back() : router.replace('/'));
 	const devoteeId = String(id);
 	const devotee = devoteesData.find((d) => d.id.toString() === devoteeId);
 
@@ -262,7 +263,7 @@ export default function SadhanaDetailScreen() {
 				<View style={styles.centered}>
 					<CircleAlert size={28} color={Palette.textMuted} />
 					<Text style={styles.emptyTitle}>Devotee not found</Text>
-					<Pressable onPress={() => router.back()} style={styles.backLink}>
+					<Pressable onPress={goBack} style={styles.backLink} accessibilityRole="button">
 						<Text style={styles.backLinkText}>Go back</Text>
 					</Pressable>
 				</View>
@@ -274,7 +275,7 @@ export default function SadhanaDetailScreen() {
 		<SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right', 'bottom']}>
 			<View style={styles.header}>
 				<Pressable
-					onPress={() => router.back()}
+					onPress={goBack}
 					hitSlop={8}
 					style={styles.backButton}
 					accessibilityRole="button"
@@ -398,6 +399,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		headerText: {
 			flex: 1,
+			minWidth: 0,
 		},
 		headerName: {
 			...Type.title,

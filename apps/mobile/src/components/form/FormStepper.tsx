@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Pressable, StyleSheet, TextInput, Platform } from 'react-native';
 import type { DayValue } from '@iyf/domain';
-import { Radius, Type, HIT_SIZE, type PaletteShape } from '@/constants/palette';
+import { Radius, Space, Type, HIT_SIZE, type PaletteShape } from '@/constants/palette';
 import { useStyles } from '@/hooks/useStyles';
 import type { FieldFocus } from '@/hooks/useFormFocus';
 
@@ -93,6 +93,8 @@ export default function FormStepper({
 					value={String(safeValue)}
 					onChangeText={handleText}
 					keyboardType="number-pad"
+					inputMode="numeric"
+					accessibilityLabel={label || 'Value'}
 					selectTextOnFocus
 					maxLength={4}
 					returnKeyType={advances ? 'next' : 'done'}
@@ -125,10 +127,11 @@ const makeStyles = (Palette: PaletteShape) =>
 		container: {
 			flexDirection: 'row',
 			alignItems: 'center',
+			gap: Space.sm,
 		},
 		button: {
-			width: HIT_SIZE - 8,
-			height: HIT_SIZE - 8,
+			width: HIT_SIZE,
+			height: HIT_SIZE,
 			borderRadius: Radius.pill,
 			backgroundColor: Palette.surfaceSunken,
 			alignItems: 'center',
@@ -148,7 +151,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		// couple of pixels past rather than padding every other row to match it.
 		valueContainer: {
 			minWidth: 60,
-			minHeight: HIT_SIZE - 8,
+			minHeight: HIT_SIZE,
 			flexDirection: 'row',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -156,6 +159,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		valueInput: {
 			...Type.bodyStrong,
+			...(Platform.OS === 'web' && { fontSize: 16, width: 40 }),
 			color: Palette.textPrimary,
 			padding: 0,
 			textAlign: 'center',

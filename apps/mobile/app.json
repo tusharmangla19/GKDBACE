@@ -4,12 +4,19 @@
     "slug": "sadhana-mobile",
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon.png",
     "scheme": "sadhanamobile",
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "name": "IYF Sadhana",
+      "favicon": "./assets/images/app-icon.png"
+    },
     "userInterfaceStyle": "automatic",
     "ios": {
       "bundleIdentifier": "com.iyf.sadhana"

@@ -50,7 +50,7 @@ export const FIELD_GROUPS = [
 	{ key: 'hearing', label: 'Hearing' },
 	{ key: 'reading', label: 'Reading' },
 	{ key: 'service', label: 'Service' },
-	{ key: 'rhythm', label: 'Rest & Rhythm' },
+	{ key: 'rest', label: 'Rest' },
 ];
 
 export const morningProgramSchema = [
@@ -64,7 +64,7 @@ export const morningProgramSchema = [
 		unit: 'time',
 		goodDirection: 'down',
 		target: null,
-		group: 'rhythm',
+		group: 'rest',
 		icon: 'moon',
 	},
 	{
@@ -77,7 +77,7 @@ export const morningProgramSchema = [
 		unit: 'time',
 		goodDirection: 'down',
 		target: null,
-		group: 'rhythm',
+		group: 'rest',
 		icon: 'sunrise',
 	},
 	{
@@ -250,7 +250,7 @@ export const morningProgramSchema = [
 		// better either. Show the change without a verdict.
 		goodDirection: 'neutral',
 		target: null,
-		group: 'rhythm',
+		group: 'rest',
 		icon: 'hammock',
 	},
 ];

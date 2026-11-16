@@ -62,7 +62,7 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		button: {
 			minWidth: 52,
-			minHeight: HIT_SIZE - 8,
+			minHeight: HIT_SIZE,
 			paddingHorizontal: 14,
 			alignItems: 'center',
 			justifyContent: 'center',

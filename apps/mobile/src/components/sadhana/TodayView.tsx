@@ -147,7 +147,7 @@ export default function TodayView({
 
 	/*
 	 * The form is twelve fields tall and the number pad covers roughly the bottom
-	 * third, so tapping Wake Up or anything in Rest & Rhythm used to hide the very
+	 * third, so tapping Wake Up or anything in Rest used to hide the very
 	 * field being edited.
 	 *
 	 * Two mechanisms, one per platform, because applying both would lift the field
@@ -433,6 +433,8 @@ const makeStyles = (Palette: PaletteShape) =>
 		},
 		fieldRow: {
 			flexDirection: 'row',
+			flexWrap: 'wrap',
+			gap: Space.sm,
 			alignItems: 'center',
 			justifyContent: 'space-between',
 			paddingVertical: Space.sm,
@@ -440,6 +442,8 @@ const makeStyles = (Palette: PaletteShape) =>
 			borderTopColor: Palette.border,
 		},
 		fieldLabelWrap: {
+			flexBasis: 100,
+			flexGrow: 1,
 			flexDirection: 'row',
 			alignItems: 'center',
 			gap: Space.sm,
@@ -447,12 +451,14 @@ const makeStyles = (Palette: PaletteShape) =>
 			paddingRight: Space.sm,
 		},
 		fieldLabel: {
+			flexShrink: 1,
 			...Type.bodyStrong,
 			fontWeight: '700',
 			color: Palette.textPrimary,
 		},
 
 		fieldInput: {
+			marginLeft: 'auto',
 			alignItems: 'flex-end',
 		},
 		saveButton: {

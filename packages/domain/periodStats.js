@@ -239,7 +239,8 @@ export function buildPeriodStats(records, anchor, unit, now = new Date()) {
 			// this, so a card and a table can never round it differently.
 			value: calculateFieldAverage(currentRecords, field.key),
 			display: formatValue(field, current.raw),
-			unit: unitLabel(field, current.raw),
+			unit:
+				field.unit === 'min' && Math.round(current.raw) >= 60 ? '' : unitLabel(field, current.raw),
 			count: current.count,
 			// The denominator the UI must disclose: how many days could have
 			// contributed, versus how many actually did.
